@@ -29,7 +29,14 @@ db.collection("jugadores")
     snapshot.forEach(doc => {
       const j = doc.data();
       const li = document.createElement("li");
-      li.textContent = `${j.nombre} - ${j.puntos} pts`;
+
+      li.innerHTML = `
+        <strong>${j.nombre}</strong> — ${j.puntos} pts
+        <button onclick="sumar('${doc.id}', 1)">+1</button>
+        <button onclick="sumar('${doc.id}', 2)">+2</button>
+        <button onclick="sumar('${doc.id}', 3)">+3</button>
+      `;
+
       lista.appendChild(li);
     });
   });
