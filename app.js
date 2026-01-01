@@ -13,6 +13,8 @@ boton.addEventListener("click", () => {
     puntos: 0,
     dobles: 0,
     triples: 0,
+    asistencias: 0,
+    rebotes: 0,
     creado: Date.now()
   });
 
@@ -33,10 +35,14 @@ db.collection("jugadores")
         <strong>${j.nombre}</strong><br>
         🏀 ${j.puntos} pts |
         2️⃣ ${j.dobles} |
-        3️⃣ ${j.triples}
+        3️⃣ ${j.triples} |
+        🤝 ${j.asistencias} |
+        🔁 ${j.rebotes}
         <br>
         <button onclick="doble('${doc.id}')">+2</button>
         <button onclick="triple('${doc.id}')">+3</button>
+        <button onclick="asistencia('${doc.id}')">+AST</button>
+        <button onclick="rebote('${doc.id}')">+REB</button>
         <button onclick="borrar('${doc.id}')">🗑️</button>
         <hr>
       `;
@@ -45,7 +51,7 @@ db.collection("jugadores")
     });
   });
 
-/* RANKING AUTOMÁTICO (SOLO POR PUNTOS) */
+/* RANKING AUTOMÁTICO (SOLO PUNTOS) */
 db.collection("jugadores")
   .orderBy("puntos", "desc")
   .onSnapshot(snapshot => {
@@ -61,7 +67,7 @@ db.collection("jugadores")
     });
   });
 
-/* SUMAR DOBLE */
+/* FUNCIONES */
 function doble(id) {
   db.collection("jugadores").doc(id).update({
     puntos: firebase.firestore.FieldValue.increment(2),
@@ -69,7 +75,6 @@ function doble(id) {
   });
 }
 
-/* SUMAR TRIPLE */
 function triple(id) {
   db.collection("jugadores").doc(id).update({
     puntos: firebase.firestore.FieldValue.increment(3),
@@ -77,7 +82,18 @@ function triple(id) {
   });
 }
 
-/* BORRAR JUGADOR */
+function asistencia(id) {
+  db.collection("jugadores").doc(id).update({
+    asistencias: firebase.firestore.FieldValue.increment(1)
+  });
+}
+
+function rebote(id) {
+  db.collection("jugadores").doc(id).update({
+    rebotes: firebase.firestore.FieldValue.increment(1)
+  });
+}
+
 function borrar(id) {
   if (!confirm("¿Borrar jugador?")) return;
   db.collection("jugadores").doc(id).delete();
