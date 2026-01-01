@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Basket Stats</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial;
+      padding: 10px;
+    }
+    .player {
+      border: 1px solid #333;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+    }
+    button {
+      margin: 3px;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🏀 Basket Stats</h1>
+
+<input id="playerName" placeholder="Nombre del jugador">
+<button onclick="addPlayer()">Agregar</button>
+
+<div id="players"></div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "PEGAR_ACÁ",
+    authDomain: "PEGAR_ACÁ",
+    projectId: "PEGAR_ACÁ",
+    storageBucket: "PEGAR_ACÁ",
+    messagingSenderId: "PEGAR_ACÁ",
+    appId: "PEGAR_ACÁ"
+  };
+
+  window.app = initializeApp(firebaseConfig);
+  window.db = getFirestore(app);
+</script>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
