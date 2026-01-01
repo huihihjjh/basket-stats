@@ -2,19 +2,36 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Test</title>
+  <title>Basket Stats</title>
 </head>
 <body>
 
-<h1>App cargó</h1>
+<h1>🏀 Basket Stats</h1>
+
+<input id="nombre" placeholder="Nombre del jugador" />
+<button id="agregar">Agregar</button>
+
+<ul id="lista"></ul>
+
+<!-- Firebase v8 -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
 <script>
-  alert("HTML cargó");
+  var firebaseConfig = {
+    apiKey: "AIzaSyC9ypm80OU7qXG_XOFx3k7Dh8bW5LamspU",
+    authDomain: "basket-statss.firebaseapp.com",
+    projectId: "basket-statss",
+    storageBucket: "basket-statss.appspot.com",
+    messagingSenderId: "109847350198",
+    appId: "1:109847350198:web:d218be7586b3b38f50cf17"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
 </script>
 
-<script src="app.js"></script>
-
-</body>
 <script src="./app.js"></script>
 
+</body>
 </html>
