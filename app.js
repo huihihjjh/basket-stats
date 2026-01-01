@@ -36,8 +36,8 @@ db.collection("jugadores")
         🏀 ${j.puntos} pts |
         2️⃣ ${j.dobles} |
         3️⃣ ${j.triples} |
-        Asistencias ${j.asistencias} |
-        Rebotes ${j.rebotes}
+        AST ${j.asistencias} |
+        REB ${j.rebotes}
         <br>
         <button onclick="doble('${doc.id}')">+2</button>
         <button onclick="triple('${doc.id}')">+3</button>
