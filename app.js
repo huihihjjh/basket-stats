@@ -9,11 +9,8 @@ boton.addEventListener("click", () => {
   db.collection("jugadores").add({
     nombre: nombre,
     puntos: 0,
-    triples: 0,
-    dobles: 0,
     asistencias: 0,
     rebotes: 0,
-    tapones: 0,
     creado: Date.now()
   });
 
@@ -29,18 +26,32 @@ db.collection("jugadores")
       const li = document.createElement("li");
 
       li.innerHTML = `
-        <strong>${j.nombre}</strong> — ${j.puntos} pts
-        <button onclick="sumar('${doc.id}', 1)">+1</button>
-        <button onclick="sumar('${doc.id}', 2)">+2</button>
-        <button onclick="sumar('${doc.id}', 3)">+3</button>
+        <strong>${j.nombre}</strong><br>
+        🏀 ${j.puntos} pts |
+        🤝 ${j.asistencias} ast |
+        🔁 ${j.rebotes} reb
+        <br>
+        <button onclick="sumar('${doc.id}', 'puntos', 1)">+1</button>
+        <button onclick="sumar('${doc.id}', 'puntos', 2)">+2</button>
+        <button onclick="sumar('${doc.id}', 'puntos', 3)">+3</button>
+        <button onclick="sumar('${doc.id}', 'asistencias', 1)">+AST</button>
+        <button onclick="sumar('${doc.id}', 'rebotes', 1)">+REB</button>
+        <button onclick="borrar('${doc.id}')">🗑️</button>
+        <hr>
       `;
 
       lista.appendChild(li);
     });
   });
 
-function sumar(id, puntos) {
+function sumar(id, campo, valor) {
   db.collection("jugadores").doc(id).update({
-    puntos: firebase.firestore.FieldValue.increment(puntos)
+    [campo]: firebase.firestore.FieldValue.increment(valor)
   });
+}
+
+function borrar(id) {
+  if (!confirm("¿Borrar jugador?")) return;
+
+  db.collection("jugadores").doc(id).delete();
 }
