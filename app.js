@@ -3,6 +3,8 @@ const boton = document.getElementById("agregar");
 const lista = document.getElementById("lista");
 
 boton.addEventListener("click", () => {
+  console.log("CLICK");
+
   const nombre = input.value.trim();
   if (nombre === "") return;
 
