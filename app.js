@@ -3,8 +3,6 @@ const boton = document.getElementById("agregar");
 const lista = document.getElementById("lista");
 
 boton.addEventListener("click", () => {
-  console.log("CLICK");
-
   const nombre = input.value.trim();
   if (nombre === "") return;
 
@@ -40,3 +38,9 @@ db.collection("jugadores")
       lista.appendChild(li);
     });
   });
+
+function sumar(id, puntos) {
+  db.collection("jugadores").doc(id).update({
+    puntos: firebase.firestore.FieldValue.increment(puntos)
+  });
+}
